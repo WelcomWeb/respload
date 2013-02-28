@@ -68,10 +68,10 @@ Many sites uses image galleries where only the first image is displayed by defau
                 <img src="" data-responsive-preload="small-image1.png" id="phone-gallery-img" />
             </div>
             <div class="item hidden">
-                <img src="" data-responsive-preload="small-image2.png" data-responsive-preload-dep="#desktop-gallery-img" />
+                <img src="" data-responsive-preload="small-image2.png" data-responsive-preload-dep="#phone-gallery-img" />
             </div>
             <div class="item hidden">
-                <img src="" data-responsive-preload="small-image3.png" data-responsive-preload-dep="#desktop-gallery-img" />
+                <img src="" data-responsive-preload="small-image3.png" data-responsive-preload-dep="#phone-gallery-img" />
             </div>
         </div>
     ...
