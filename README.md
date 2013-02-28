@@ -11,6 +11,7 @@ ResponsivePreload uses `document.querySelector` to select DOM nodes, which is on
 
 ## A simple example using Twitter Bootstrap
 **index.html**
+
     <!DOCTYPE html>
     <html>
     	<head>
