@@ -10,7 +10,7 @@ By adding an attribute called `data-responsive-preload` to your `<img>` elements
 ResponsivePreload comes in two different versions, one standard and one prefixed with `jquery`. The standard version should work cross browser and comes without dependencies, while the `jquery` version leaves a smaller footprint but depends on jQuery. So if you already use jQuery, the `jquery.responsive-preloader.js` should be preferred.
 
 ## Browser support
-ResponsivePreload uses `document.querySelector` to select DOM nodes, which is only available in modern browsers. To support IE6 and/or IE7, Sizzle can be used for selection by specifying the URL to Sizzle.js when initializing ResponsivePreload. See the simple example below.
+ResponsivePreload uses `document.querySelector` to select DOM nodes, which is only available in modern browsers. To support IE6 and/or IE7, [Sizzle](http://sizzlejs.com/) can be used for selection by specifying the URL to Sizzle.js when initializing ResponsivePreload. See the simple example below.
 
 ## A simple example using Twitter Bootstrap
 **index.html**
@@ -74,4 +74,6 @@ Many sites uses image galleries where only the first image is displayed by defau
                 <img src="" data-responsive-preload="small-image3.png" data-responsive-preload-dep="#desktop-gallery-img" />
             </div>
         </div>
+    ...
 
+Happy coding!
