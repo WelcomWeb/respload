@@ -25,6 +25,9 @@ ResponsivePreload uses `document.querySelector` to select DOM nodes, which is on
             <div class="visible-phone">
                 <img src="" data-responsive-preload="images/a-smaller-image.png" />
             </div>
+            <div class="visible-tablet">
+                <img src="" data-responsive-preload="images/a-medium-image.png" />
+            </div>
             <div class="visible-desktop">
                 <img src="" data-responsive-preload="images/a-larger-image.png" />
             </div>
@@ -61,6 +64,17 @@ Many sites uses image galleries where only the first image is displayed by defau
             </div>
             <div class="item hidden">
                 <img src="" data-responsive-preload="large-image3.png" data-responsive-preload-dep="#desktop-gallery-img" />
+            </div>
+        </div>
+        <div class="my-gallery-desktop visibile-tablet">
+            <div class="item">
+                <img src="" data-responsive-preload="medium-image1.png" id="tablet-gallery-img" />
+            </div>
+            <div class="item hidden">
+                <img src="" data-responsive-preload="medium-image2.png" data-responsive-preload-dep="#desktop-gallery-img" />
+            </div>
+            <div class="item hidden">
+                <img src="" data-responsive-preload="medium-image3.png" data-responsive-preload-dep="#desktop-gallery-img" />
             </div>
         </div>
         <div class="my-gallery-desktop visibile-phone">
