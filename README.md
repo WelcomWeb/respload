@@ -91,3 +91,5 @@ Many sites uses image galleries where only the first image is displayed by defau
     ...
 
 Happy coding!
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/952b898d222ae5016664cfad5088d145 "githalytics.com")](http://githalytics.com/WelcomWeb/ResponsivePreload)
