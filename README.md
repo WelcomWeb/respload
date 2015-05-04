@@ -1,18 +1,26 @@
-# ResponsivePreload, a selective preloader for responsive sites
+# Responsive Preloader - or Respload:
+## A minimal selective preloader for responsive sites
 
-## About
-ResponsivePreload minimizes the amount of image requests for responsive sites, where media queries are used. A selective preloader that only downloads the images for the active media query, when the browser window is resized or when a tablet/phone changes orientation.
+### About
+Respload minimizes the amount of image requests for responsive sites, where media queries are used. A selective preloader that only downloads the images for the active media query, when the browser window is resized or when a tablet/phone changes orientation.
 
-## Usage
-By adding an attribute called `data-responsive-preload` to your `<img>` elements, and leaving the `src` attribute blank, you tell ResponsivePreload to only activate the images for the active media query.
+### Installation
+Repsload supports CommonJS, AMD or simple script tag injection. It's also available as a NPM packages, install via
 
-## Which version should I choose?
-ResponsivePreload comes in two different versions, one standard and one prefixed with `jquery`. The standard version should work cross browser and comes without dependencies, while the `jquery` version leaves a smaller footprint but depends on jQuery. So if you already use jQuery, the `jquery.responsive-preloader.js` should be preferred.
+    npm install --save-dev respload
 
-## Browser support
-ResponsivePreload uses `document.querySelector` to select DOM nodes, which is only available in modern browsers. To support IE6 and/or IE7, [Sizzle](http://sizzlejs.com/) can be used for selection by specifying the URL to Sizzle.js when initializing ResponsivePreload. See the simple example below.
+or:
 
-## A simple example using Twitter Bootstrap
+[Download development version](https://raw.githubusercontent.com/WelcomWeb/respload/master/dist/respload-1.0.js) (4KB)
+[Download minified production version](https://raw.githubusercontent.com/WelcomWeb/respload/master/dist/respload-1.0.min.js) (1KB)
+
+### Usage
+By adding an attribute called `data-src` to your `<img>` elements, and leaving the `src` attribute blank, you tell Respload to only activate the images for the active media query.
+
+### Browser support
+Respload uses `document.querySelectorAll` internally, when no parameter is passed to it or a string selector is used. To support browsers without the query selector, simply pass in a node list of the elements that's going to be preloaded.
+
+### A simple example using Twitter Bootstrap
 **index.html**
 
     <!DOCTYPE html>
@@ -23,73 +31,52 @@ ResponsivePreload uses `document.querySelector` to select DOM nodes, which is on
     	</head>
         <body>
             <div class="visible-phone">
-                <img src="" data-responsive-preload="images/a-smaller-image.png" />
+                <img src="" data-src="images/a-smaller-image.png" />
             </div>
             <div class="visible-tablet">
-                <img src="" data-responsive-preload="images/a-medium-image.png" />
+                <img src="" data-src="images/a-medium-image.png" />
             </div>
             <div class="visible-desktop">
-                <img src="" data-responsive-preload="images/a-larger-image.png" />
+                <img src="" data-src="images/a-larger-image.png" />
             </div>
-            <script src="/javascripts/responsive-preloader-0.1.min.js"></script>
+            <script src="/javascripts/respload-1.0.min.js"></script>
             <script>
                 window.onload = function () {
-                    var options = {
-                        // Should listen to `onresize` event
-                        'resizable': true,
-
-                        // To support IE6/IE7 we can use Sizzle,
-                        // by specifying a URL to Sizzle.js
-                        'sizzle': '/javascripts/sizzle.js'
-                    }
-                    ResponsivePreload.init(options);
+                    /**
+                     * Resploads default selector is "img[data-src]"
+                     */
+                    Respload.init();
+                    
+                    /**
+                     * Passing in a string selector
+                     */
+                    Respload.init("img[data-src]");
+                    
+                    /**
+                     * Support for older browsers, simply pass in a list of elements.
+                     * jQuery can be used effectively here;
+                     */
+                    var list = $('img[data-src]').toArray();
+                    Respload.init(list);
                 }
             </script>
         </body>
     </html>
 
-## Galleries
-Many sites uses image galleries where only the first image is displayed by default, and the rest is hidden. To enable ResponsivePreload to work with these elements as well, you can specify a *responsive dependency* by adding yet another attribute to these elements, called `data-responsive-preload-dep`. This attribute should point to the depended image element, by ID.
+### React
+Respload is also available as a React component, as a CommonJS module;
 
-**gallery.html**
-
-    <!DOCTYPE html>
-    ...
-        <div class="my-gallery-desktop visibile-desktop">
-            <div class="item">
-                <img src="" data-responsive-preload="large-image1.png" id="dekstop-gallery-img" />
-            </div>
-            <div class="item hidden">
-                <img src="" data-responsive-preload="large-image2.png" data-responsive-preload-dep="#desktop-gallery-img" />
-            </div>
-            <div class="item hidden">
-                <img src="" data-responsive-preload="large-image3.png" data-responsive-preload-dep="#desktop-gallery-img" />
-            </div>
-        </div>
-        <div class="my-gallery-desktop visibile-tablet">
-            <div class="item">
-                <img src="" data-responsive-preload="medium-image1.png" id="tablet-gallery-img" />
-            </div>
-            <div class="item hidden">
-                <img src="" data-responsive-preload="medium-image2.png" data-responsive-preload-dep="#desktop-gallery-img" />
-            </div>
-            <div class="item hidden">
-                <img src="" data-responsive-preload="medium-image3.png" data-responsive-preload-dep="#desktop-gallery-img" />
-            </div>
-        </div>
-        <div class="my-gallery-desktop visibile-phone">
-            <div class="item">
-                <img src="" data-responsive-preload="small-image1.png" id="phone-gallery-img" />
-            </div>
-            <div class="item hidden">
-                <img src="" data-responsive-preload="small-image2.png" data-responsive-preload-dep="#phone-gallery-img" />
-            </div>
-            <div class="item hidden">
-                <img src="" data-responsive-preload="small-image3.png" data-responsive-preload-dep="#phone-gallery-img" />
-            </div>
-        </div>
-    ...
+    var React = require('react'),
+        ResploadImage = require('respload/react');
+    
+    var MyModule = React.createClass({
+        render: function () {
+            return (
+                <div className="hidden-phone">
+                    <ResploadImage src={"/images/large-image.png"} />
+                </div>
+            );
+        }
+    }); 
 
 Happy coding!
-
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/952b898d222ae5016664cfad5088d145 "githalytics.com")](http://githalytics.com/WelcomWeb/ResponsivePreload)
