@@ -5,7 +5,7 @@
 Respload minimizes the amount of image requests for responsive sites, where media queries are used. A selective preloader that only downloads the images for the active media query, when the browser window is resized or when a tablet/phone changes orientation.
 
 ### Installation
-Repsload supports CommonJS, AMD or simple script tag injection. It's also available as a NPM packages, install via
+Respload supports CommonJS, AMD or simple script tag injection. It's also available as a NPM package, install via
 
     npm install --save-dev respload
 
@@ -15,10 +15,10 @@ or:
 [Download minified production version](https://raw.githubusercontent.com/WelcomWeb/respload/master/dist/respload-1.0.min.js) (1KB)
 
 ### Usage
-By adding an attribute called `data-src` to your `<img>` elements, and leaving the `src` attribute blank, you tell Respload to only activate the images for the active media query.
+By adding an attribute called `data-src` to your `<img>` elements, and leaving the `src` attribute blank, you tell Respload to only activate the images for the current matching media query.
 
 ### Browser support
-Respload uses `document.querySelectorAll` internally, when no parameter is passed to it or a string selector is used. To support browsers without the query selector, simply pass in a node list of the elements that's going to be preloaded.
+Respload uses `document.querySelectorAll` internally for selecting DOM elements, either when no parameter is passed to it or a string selector is used. To support browsers without the query selector, simply pass in a node list of the elements that's going to be preloaded.
 
 ### A simple example using Twitter Bootstrap
 **index.html**
@@ -43,7 +43,7 @@ Respload uses `document.querySelectorAll` internally, when no parameter is passe
             <script>
                 window.onload = function () {
                     /**
-                     * Resploads default selector is "img[data-src]"
+                     * Respload's default selector is "img[data-src]"
                      */
                     Respload.init();
                     
@@ -58,6 +58,11 @@ Respload uses `document.querySelectorAll` internally, when no parameter is passe
                      */
                     var list = $('img[data-src]').toArray();
                     Respload.init(list);
+                    
+                    /**
+                     * Or you can pass in just one element;
+                     */
+                    Respload.init(document.getElementsByTagName('img')[0]);
                 }
             </script>
         </body>
